@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav class="mb-1 navbar navbar-expand-lg navbar-dark elegant-color-dark">
+          <a class="navbar-brand" href="{{ path('default') }}">Forum</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+            aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ path('default') }}">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Somethingshere</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Somethingsthere</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">CRUD'S</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{{ path('category_index') }}">Category</a>
+                  <a class="dropdown-item" href="{{ path('post_index') }}">Post</a>
+                  <a class="dropdown-item" href="{{ path('reaction_index') }}">Reaction</a>
+                  <a class="dropdown-item" href="{{ path('user_index') }}">User</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('easyadmin') }}">EasyAdmin</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-user"></i> Profile </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                  <a class="dropdown-item" href="{{ path('fos_user_security_login') }}">Login</a>
+                  <a class="dropdown-item" href="{{ path('fos_user_registration_register') }}">Register</a>
+                  <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="container">
+          {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+
+{% for category in categories %}
+<div class="card card-body mb-3">
+    <h3 class="black-text"><b>{{ category.title }}</b></h3>
+    <br>
+    <div class="media d-block d-md-flex">
+        <img class="d-flex avatar-2 mb-md-0 mb-3 mx-auto" src="https://cdn.pixabay.com/photo/2016/12/20/22/32/holiday-shopping-1921658_960_720.jpg"
+            alt="Generic placeholder image" style="width: 300px">
+        <div class="media-body text-center text-md-left ml-md-3 ml-0">
+            <p>{{ category.description }}</p>
+            <br><br><br>
+            <a href="{{ path('all_posts') }}" class="white-text"><button type="button" class="btn btn-primary btn-md float-right"><b>Read more</b></button></a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
