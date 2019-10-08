@@ -32,7 +32,7 @@ class PostController extends AbstractController
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
-        $post->setCreatedAt(new \DateTime());
+       // $post->setCreatedAt(new \DateTime());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

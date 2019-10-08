@@ -4,6 +4,42 @@
 
 {% block body %}
 
+<br><br><br>
+
+<button id="modalActivate" type="button" class="btn btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+    Create Thread
+</button>
+
+<br><br><br><br>
+  
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Fill in the fields:</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ form_label(form.title) }}
+        {{ form_errors(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_label(form.text) }}
+        {{ form_errors(form.text) }}
+        {{ form_widget(form.text) }}
+        {{ form_label(form.category) }}
+        {{ form_errors(form.category) }}
+        {{ form_widget(form.category) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% for category in categories %}
 <div class="card card-body mb-3">
     <h3 class="black-text"><b>{{ category.title }}</b></h3>
@@ -14,7 +50,7 @@
         <div class="media-body text-center text-md-left ml-md-3 ml-0">
             <p>{{ category.description }}</p>
             <br><br><br>
-            <a href="{{ path('all_posts') }}" class="white-text"><button type="button" class="btn btn-primary btn-md float-right"><b>Read more</b></button></a>
+            <a href="{{ path('posts', {id: category.id}) }}" class="white-text"><button type="button" class="btn btn-primary btn-md float-right"><b>View Threads</b></button></a>
         </div>
     </div>
 </div>
