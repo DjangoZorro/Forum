@@ -6,6 +6,7 @@ use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class MakePostType extends AbstractType
 {
@@ -15,6 +16,7 @@ class MakePostType extends AbstractType
             ->add('title')
             ->add('text')
             ->add('category')
+            ->add('save', SubmitType::class, ['label' => 'Save changes'])
         ;
     }
 

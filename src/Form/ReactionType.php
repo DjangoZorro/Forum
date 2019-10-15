@@ -6,6 +6,7 @@ use App\Entity\Reaction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ReactionType extends AbstractType
 {
@@ -13,8 +14,7 @@ class ReactionType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('post')
-            ->add('user')
+            ->add('save', SubmitType::class, ['label' => 'Save changes'])
         ;
     }
 

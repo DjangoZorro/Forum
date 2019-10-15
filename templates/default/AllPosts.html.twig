@@ -4,14 +4,14 @@
 
 {% block body %}
 
-{% for post in posts %}
+{% for post in category.posts %}
 <div class="card mb-3">
     <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
+      <h5 class="card-title text-truncate" style="max-width: 390px;">{{ post.title }}</h5>
       <p class="card-text">{{ post.text }}</p>
-      <a href="#" class="btn btn-primary btn-md float-right">View Post</a>
+      <a href="{{ path('view_post', {id: post.id}) }}" class="btn btn-primary btn-md float-right">View Post</a>
     </div>
-  </div>
+</div>
 {% endfor %}
 
 {% endblock %}

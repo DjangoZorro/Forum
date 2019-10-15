@@ -28,6 +28,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Somethingsthere</a>
               </li>
+              {% if is_granted('ROLE_ADMIN') %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">CRUD'S</a>
@@ -41,24 +42,30 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('easyadmin') }}">EasyAdmin</a>
               </li>
+              {% endif %}
             </ul>
             <ul class="navbar-nav ml-auto nav-flex-icons">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-user"></i> Profile </a>
+                  <i class="fas fa-user"></i> {% if app.user %}{{ app.user }}{% else %}Profile{% endif %} </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                  {% if app.user %}
+                  <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Log out</a>
+                  {% else %}
                   <a class="dropdown-item" href="{{ path('fos_user_security_login') }}">Login</a>
                   <a class="dropdown-item" href="{{ path('fos_user_registration_register') }}">Register</a>
-                  <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Log out</a>
+                  {% endif %}
                 </div>
               </li>
             </ul>
           </div>
         </nav>
+        <br><br><br>
         <div class="container">
           {% block body %}{% endblock %}
         </div>
+        <br><br><br>
         {% block javascripts %}
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>

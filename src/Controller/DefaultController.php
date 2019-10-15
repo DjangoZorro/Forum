@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Post;
 use App\Form\MakePostType;
+use App\Entity\Reaction;
+use App\Form\ReactionType;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
+use App\Repository\ReactionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,15 +29,14 @@ class DefaultController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-
+            
+            $this->denyAccessUnlessGranted('ROLE_USER');
             $post = new Post();
             $post->setAuthor($user);
             $post->setTitle($form['title']->getData());
             $post->setText($form['text']->getData());
             $post->setCategory($form['category']->getData());
-            // var_dump($data['title']);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
@@ -54,10 +56,44 @@ class DefaultController extends AbstractController
      */
     public function showAction(Category $category)
     {
-        $repository = $this->getDoctrine()->getRepository(Post::class)->findBy(['category' => $category]);
 
         return $this->render('default/AllPosts.html.twig', [
-            'posts' => $repository,
+            'category' => $category,
+        ]);
+    }
+
+    /**
+     * @Route("/viewpost/{id}", name="view_post", methods={"GET", "POST"})
+     */
+    public function viewAction(Post $post, Request $request): Response
+    {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $repository = $this->getDoctrine()->getRepository(Reaction::class);
+        $reaction = $repository->findBy(
+            ['post' => $post]
+        );
+        $form = $this->createForm(ReactionType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->denyAccessUnlessGranted('ROLE_USER');
+            $reaction = new Reaction();
+            $reaction->setUser($user);
+            $reaction->setPost($post);
+            $reaction->setText($form['text']->getData());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($reaction);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('view_post', ['id' => $post->getId()]);
+        }
+
+        return $this->render('default/ViewPost.html.twig', [
+            'form' => $form->createView(),
+            'reactions' => $reaction,
+            'post' => $post,
         ]);
     }
 }

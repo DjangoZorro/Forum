@@ -17,7 +17,7 @@ class Reaction
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=10000)
      */
     private $text;
 
@@ -30,6 +30,11 @@ class Reaction
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
+
+    public function  __construct()
+    {
+        $this->created_at = new \DateTime('now');    
+    }
 
     public function getId(): ?int
     {

@@ -4,11 +4,11 @@
 
 {% block body %}
 
-<br><br><br>
-
-<button id="modalActivate" type="button" class="btn btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-    Create Thread
-</button>
+<div class="text-center">
+    <button id="modalActivate" type="button" class="btn btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+        <b>Create Thread</b>
+    </button>
+</div>
 
 <br><br><br><br>
   
@@ -22,19 +22,18 @@
         </button>
       </div>
       <div class="modal-body">
-        {{ form_label(form.title) }}
-        {{ form_errors(form.title) }}
-        {{ form_widget(form.title) }}
-        {{ form_label(form.text) }}
-        {{ form_errors(form.text) }}
-        {{ form_widget(form.text) }}
-        {{ form_label(form.category) }}
-        {{ form_errors(form.category) }}
-        {{ form_widget(form.category) }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+        {{ form_start(form) }}
+          {{ form_row(form.title) }}
+          {{ form_row(form.text) }}
+          {{ form_row(form.category) }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+          {{ form_row(form.save, { 
+            'label': 'Save changes',
+            'attr': {'class': 'btn btn-primary btn-sm'} 
+          }) }}
+          {{ form_end(form) }}
       </div>
     </div>
   </div>
